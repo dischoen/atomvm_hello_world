@@ -6,11 +6,12 @@ Based on the hello_world example project of atomvm.
 
 On my machine (Dell laptop with Ubuntu 22 LTS) two serial devices
 are created when I connect the ESP32S3:
-/dev/ttyACM0 and /dev/ttyACM1
+- /dev/ttyACM0
+- /dev/ttyACM1
 
 After playing around a bit, the following usage of the ports works best for me:
-use ACM0 for erasing and uploading firmware and projects
-use ACM1 to communicate with the board at runtime (e.g. picocom)
+- use ACM0 for erasing and uploading firmware and projects
+- use ACM1 to communicate with the board at runtime (e.g. picocom)
 
 The other way around also worked, but uploading is much slower and
 the communication with the terminal program crashes during uploads.
@@ -29,9 +30,6 @@ invalid header: 0xffffffff
 This happens when the device has been erased or when crappy firmware has been uploaded.
 Or if something has been uploaded at the wrong address.
 
-I had the same symptoms as in this issue:
-https://github.com/espressif/esp-idf/issues/7821
-
 After erasing and uploading AtomVM to address 0x1000, this is what I saw:
 
 ```
@@ -46,6 +44,10 @@ load:0x206f7420,len:0x69726576
 Invalid image block, can't boot.
 ets_main.c 329 
 ```
+
+These are more or less the same as in this ticket:
+
+https://github.com/espressif/esp-idf/issues/7821
 
 ## Comparison with MicroPython
 
@@ -72,7 +74,7 @@ Happy coding!
 
 The Makefile expects these files in the directory images:
 - AtomVM-esp32s3-v0.6.0-alpha.2.img
-- ESP32_GENERIC_S3-20231227-v1.22.0.bin
+- ESP32_GENERIC_S3-20231227-v1.22.0.bin (optional)
 
 They are available at
 https://github.com/atomvm/AtomVM/releases
